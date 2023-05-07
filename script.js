@@ -80,106 +80,71 @@ save.addEventListener("click",function(){
         
     })
    
-    
+ 
     
     //firstname validation..
     function check1(txt){
         let fname=document.getElementById('fname').value;
-        if(fname==""||fname.length<3){
-           document.getElementById('message').innerHTML="*please enter valid name";
-          // save.disabled=true;
-          // save.style.backgroundColor='#165612';
+        let chk=/^[A-Za-z]+$/;
+        if(fname.match(chk)){
+           document.getElementById('message').innerHTML="";
         }else {
-            document.getElementById('message').innerHTML="";
-           // save.disabled=false;
-           // save.style.backgroundColor='#0d9a1b';
-            count++;
+            document.getElementById('message').innerHTML="*please enter valid name";
         }
-    }
+    }   
      //lastname validation..
      function check2(txt){
-      
+        let chk=/^[A-Za-z]+$/;
         let lname=document.getElementById('lname').value;
-        if(lname==''||lname.length<3){
-           document.getElementById('message').innerHTML="*please enter valid name";
-          // save.disabled=true;
-          //save.style.backgroundColor='#165612';
-        }else {
-            document.getElementById('message').innerHTML="";
-           // save.disabled=false;
-            //save.style.backgroundColor='#0d9a1b';
-            count++;
-        }
-    } //Date of birth validation..
-    function check3(txt){
-       let text=document.getElementById('dob').value;
-       if(text==''){
-          document.getElementById('message').innerHTML="*please enter your dob";
-         // save.disabled=true;
-          //save.style.backgroundColor='#165612';
-       }else { 
+        if(lname.match(chk)){
            document.getElementById('message').innerHTML="";
-          // save.disabled=false;
-          // save.style.backgroundColor='#0d9a1b';
-           count++;
-       }
-   }
+        }else {
+            document.getElementById('message').innerHTML="*please enter valid name";
+        }
+    } 
      //Email validation..
      function check4(txt){
         let text=document.getElementById('email').value;
-        if(text==''){
-           document.getElementById('message').innerHTML="*please enter your email";
-           //save.disabled=true;
-          // save.style.backgroundColor='#165612';
+        let chk=/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+        if(text.match(chk)){
+           document.getElementById('message').innerHTML="";
         }else { 
-            document.getElementById('message').innerHTML="";
-           // save.disabled=false;
-            //save.style.backgroundColor='#0d9a1b';
-            count++;
+            document.getElementById('message').innerHTML="*please enter valid email format";
+          
         }
     }
     
     //password validation..
     function check5(txt){
         let text=document.getElementById('password').value;
-        if(text==''||text.length<5){
-           document.getElementById('message').innerHTML="*please give a strong password";
-           //save.disabled=true;
-          // save.style.backgroundColor='#165612';
+        let chk=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+        if(text.match(chk)){
+           document.getElementById('message').innerHTML="";
         }else { 
-            document.getElementById('message').innerHTML="";
-            save.disabled=false;
-            save.style.backgroundColor='#0d9a1b';
-            count++;
+            document.getElementById('message').innerHTML="please enter a strong password containing a small /capital character, a digit and a special character";
+           
         }
     }
     
-     //mobile number  validation..
+  //mobile number  validation..
      function check6(txt){
         let number=document.getElementById('mobile').value;
-        if(number==''||number.length<10 || number.length>10){
-           document.getElementById('message').innerHTML="*please enter a valid number";
-          // save.disabled=true;
-          // save.style.backgroundColor='#165612';
+        let chk=/[6-9]{1}[0-9]{9}/;
+        if(number.match(chk)){
+           document.getElementById('message').innerHTML="";
+          
         }else {
-            document.getElementById('message').innerHTML="";
-           // save.disabled=false;
-            //save.style.backgroundColor='#0d9a1b';
-            count++;
+            document.getElementById('message').innerHTML="*please enter a valid number";
         }
-    }
+     }
      // address validation..
      function check7(txt){
         let address=document.getElementById('address').value;
-        if( address ==''|| address.length<15){
-           document.getElementById('message').innerHTML="*please enter your full address";
-          // save.disabled=true;
-          // save.style.backgroundColor='#165612';
+        let chk=/^[A-Za-z0-9\s\,"\-]*$/;
+        if( address.match(chk)){
+           document.getElementById('message').innerHTML="";
         }else {
-            document.getElementById('message').innerHTML="";
-           // save.disabled=false;
-           // save.style.backgroundColor='#0d9a1b';
-            count++;
+            document.getElementById('message').innerHTML="*please enter your full address";
         }
     }
 
@@ -200,12 +165,37 @@ save.addEventListener("click",function(){
     })
     //empty fields validation...
     function checkgloble(){
-        document.getElementById('message1').innerHTML="*please enter your details";
+        let items=document.getElementsByClassName('needed');
         save.disabled=true;
+        document.getElementById('message1').innerHTML="*please enter your details";
         save.style.backgroundColor='#165612';
-        if(count>=7){
-            save.disabled=false;
-        }    
+        for(let i = 0; i<items.length;i++){
+            flag=1;
+            let values=items[i].value;
+            if(values==''){
+                flag=0;
+               
+            }    
+        }
+       if (flag){ 
+        document.getElementById('message1').innerHTML="";
+       save.disabled=false;
+       save.style.backgroundColor='#0d9a1b';
+       }
+       
      }
      
-    
+     
+       save.addEventListener('onclick',(e)=>{
+           value2.value="";
+           value3.value="";
+           value4.value="";
+           value5.value="";
+           value6.value="";
+           value7.value="";
+           value8.value="";
+           value9.value="";
+           value10.value="";
+           
+           
+       })
